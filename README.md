@@ -59,28 +59,30 @@ The illustrated P1179 case improves from IoU 0.7020 to 0.9279. It is a selected 
 | **S²A-Net + residual angle refiner** | **94.2568** | **62.9206** | **56.1504** |
 | YOLO26l-OBB | 96.4930 | 84.4499 | 68.8126 |
 
-<p align="center"><img src="assets/fig_main_test_performance.svg" width="95%" alt="AP50, AP75 and mAP comparison across three methods"></p>
+<p align="center"><img src="assets/fig_main_test_performance.svg" width="100%" alt="AP50, AP75 and mAP comparison across three methods"></p>
 
 All three sets of frozen TEST predictions were evaluated locally with the same polygon-based evaluator. AP50 remains unchanged for the refined S²A-Net; AP75 gains 11.9476 percentage points.
 
-<p align="center"><img src="assets/fig_ap_iou_thresholds.svg" width="95%" alt="Measured AP across ten IoU thresholds for all three methods"></p>
+<p align="center"><img src="assets/fig_ap_iou_thresholds.svg" width="100%" alt="Measured AP across ten IoU thresholds for all three methods"></p>
 
 ### Geometry and statistical validation
 
-<table>
-<tr><td width="50%" align="center"><img src="assets/fig_angle_error_distribution.svg" width="100%" alt="Angular error distribution with extreme values"><br><sub>Median: 10.0794° → 4.4625°</sub></td><td width="50%" align="center"><img src="assets/fig_iou_distribution.svg" width="100%" alt="Polygon IoU distribution"><br><sub>Median: 0.78751 → 0.81318</sub></td></tr>
-</table>
+<p align="center"><a href="assets/fig_angle_error_distribution.svg"><img src="assets/fig_angle_error_distribution.svg" width="100%" alt="Angular error distribution with all boxplot outliers and medians"></a></p>
+
+<p align="center"><a href="assets/fig_iou_distribution.svg"><img src="assets/fig_iou_distribution.svg" width="100%" alt="Polygon IoU distribution with all boxplot outliers and medians"></a></p>
+
+<sub>Both plots use the same 691 matches. Boxes span the interquartile range; whiskers extend to the last observation within 1.5 IQR. Points outside the whiskers are retained.</sub>
 
 The geometric analysis retains the original 691 matched TEST true positives. Extreme angular errors remain a limitation despite the reduced median. The 90th percentile rises from 71.08° to 75.15°.
 
-<p align="center"><img src="assets/fig_paired_bootstrap_ci.svg" width="90%" alt="Paired image-level bootstrap confidence intervals"></p>
+<p align="center"><img src="assets/fig_paired_bootstrap_ci.svg" width="100%" alt="Paired image-level bootstrap confidence intervals"></p>
 
 The paired bootstrap uses 5,000 resamples of the 51 original TEST images (seed 42). The AP75 gain has a 95% percentile interval of **[6.7330, 16.8576] points**. These intervals reflect image-level variability, not independent training runs.
 
 <details>
 <summary><b>Object size analysis and computational characterization</b></summary>
 
-<p align="center"><img src="assets/fig_size_bin_pass75.svg" width="90%" alt="Conditional localization success by object size"></p>
+<p align="center"><img src="assets/fig_size_bin_pass75.svg" width="100%" alt="Conditional localization success by object size"></p>
 
 The smallest group (<32 pixels, n=41) exhibits a decrease in conditional localization success. This metric is the fraction of fixed matched detections above IoU 0.75, not AP75.
 
