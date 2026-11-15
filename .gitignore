@@ -1,0 +1,12 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+*.pt
+*.pth
+*.onnx
+*.ckpt
+raw_data/
+dataset_avions/
+checkpoints/
+audit_outputs/
